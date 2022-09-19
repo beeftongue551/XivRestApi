@@ -1,4 +1,4 @@
-package top.beeftongue.xivrestapi
+package top.beeftongue551.xivrestapi
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

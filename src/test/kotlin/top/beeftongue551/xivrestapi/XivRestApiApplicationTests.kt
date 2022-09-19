@@ -1,4 +1,4 @@
-package top.beeftongue.xivrestapi
+package top.beeftongue551.xivrestapi
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
