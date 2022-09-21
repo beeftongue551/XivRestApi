@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.SelectProvider
 import org.apache.ibatis.builder.annotation.ProviderMethodResolver
 import org.apache.ibatis.jdbc.SQL
 import org.springframework.stereotype.Repository
-import top.beeftongue551.xivrestapi.entity.item.XivItemFinder
 import top.beeftongue551.xivrestapi.entity.recipe.XivRecipe
 import top.beeftongue551.xivrestapi.entity.recipe.XivRecipeFinder
 
@@ -21,7 +20,7 @@ interface XivRecipeRepository {
     /**
      * SQLからレシピを取得する
      *
-     * @param xivItemFinder レシピ検索用データ
+     * @param xivRecipeFinder レシピ検索用データ
      * @return レシピ情報
      */
     @SelectProvider(XivRecipeProvider::class)
@@ -40,12 +39,13 @@ interface XivRecipeRepository {
              * @param xivRecipeFinder
              * @return
              */
+            @JvmStatic
             fun getXivRecipe(xivRecipeFinder: XivRecipeFinder): String {
 
                 val sql: SQL =
                     SQL()
-                        .SELECT("")
-                        .FROM("M_XIV_ITEM")
+                        .SELECT("*")
+                        .FROM("M_XIV_RECIPE")
                         .WHERE("ItemResult = #{itemName}")
 
                 println(sql.toString())

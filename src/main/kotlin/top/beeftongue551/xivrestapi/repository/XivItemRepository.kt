@@ -13,6 +13,9 @@ import top.beeftongue551.xivrestapi.entity.item.XivItemFinder
 interface XivItemRepository {
 
     @SelectProvider(XivItemProvider::class)
+    fun getXivItemsByNames(nameList: List<String?>): Collection<XivItem>
+
+    @SelectProvider(XivItemProvider::class)
     fun getXivItems(xivItemFinder: XivItemFinder): Collection<XivItem>
 
     @SelectProvider(XivItemProvider::class)
@@ -21,6 +24,22 @@ interface XivItemRepository {
 
     class XivItemProvider: ProviderMethodResolver {
         companion object {
+
+            @JvmStatic
+            fun getXivItemsByNames(nameList: List<String?>): String {
+                var sql: SQL = SQL()
+                    .SELECT("*")
+                    .FROM("M_XIV_ITEM")
+                val sqlString = StringBuffer()
+                for (index in nameList.indices) {
+                    sqlString.append("Name = #{nameList[$index]} OR ")
+                }
+                sqlString.setLength(sqlString.length - 3)
+                sql = sql.WHERE(sqlString.toString())
+                println(sql.toString())
+                return sql.toString()
+            }
+
 
             @JvmStatic
             fun getXivItems(xivItemFinder: XivItemFinder): String {

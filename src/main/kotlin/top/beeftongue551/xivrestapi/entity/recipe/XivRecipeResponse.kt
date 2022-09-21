@@ -21,7 +21,7 @@ data class XivRecipeResponse (
     val id: Int,
     val craftType: String,
     val recipeLevel: Int,
-    val secretRecipeBook: String,
+    val secretRecipeBook: String?,
     val resultId: Int,
     val itemResult: String,
     val amountResult: Int,
