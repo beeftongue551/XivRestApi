@@ -16,6 +16,7 @@ package top.beeftongue551.xivrestapi.entity.item
  * @property equipRestriction 装備制限
  * @property classJobCategory クラスジョブカテゴリ
  * @property marketable マーケット可
+ * @property recipeId レシピID
  * @constructor Create empty XIV item
  */
 data class XivItem (
@@ -31,5 +32,6 @@ data class XivItem (
     val equipLevel: Int,
     val equipRestriction: Boolean,
     val classJobCategory: String?,
-    val marketable: Boolean
+    val marketable: Boolean,
+    val recipeId: Int?
 )

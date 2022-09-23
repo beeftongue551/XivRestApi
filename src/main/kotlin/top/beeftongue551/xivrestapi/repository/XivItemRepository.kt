@@ -30,6 +30,7 @@ interface XivItemRepository {
                 var sql: SQL = SQL()
                     .SELECT("*")
                     .FROM("M_XIV_ITEM")
+                    .LEFT_OUTER_JOIN("M_XIV_RECIPE recipe ON item.Name = recipe.Name")
                 val sqlString = StringBuffer()
                 for (index in nameList.indices) {
                     sqlString.append("Name = #{nameList[$index]} OR ")
@@ -45,7 +46,10 @@ interface XivItemRepository {
             fun getXivItems(xivItemFinder: XivItemFinder): String {
 
                 var sql: SQL =
-                    SQL().SELECT("*").FROM("M_XIV_ITEM").WHERE("Marketable = TRUE").WHERE("Name LIKE BINARY #{itemName}")
+                    SQL().SELECT("item.* recipe.ID").FROM("M_XIV_ITEM item")
+                        .LEFT_OUTER_JOIN("M_XIV_RECIPE recipe ON item.Name = recipe.Name")
+                        .WHERE("Marketable = TRUE")
+                        .WHERE("Name LIKE BINARY #{itemName}")
 
                 sql = whereSql(xivItemFinder, sql)
 
@@ -56,7 +60,10 @@ interface XivItemRepository {
             @JvmStatic
             fun getXivItemsCount(xivItemFinder: XivItemFinder): String {
                 var sql: SQL =
-                    SQL().SELECT("COUNT(*)").FROM("M_XIV_ITEM").WHERE("Marketable = TRUE").WHERE("Name LIKE BINARY #{itemName}")
+                    SQL().SELECT("COUNT(*)")
+                        .FROM("M_XIV_ITEM")
+                        .WHERE("Marketable = TRUE")
+                        .WHERE("Name LIKE BINARY #{itemName}")
 
                 sql = whereSql(xivItemFinder, sql)
 
