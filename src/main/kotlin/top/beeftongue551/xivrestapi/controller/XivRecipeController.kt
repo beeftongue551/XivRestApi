@@ -15,8 +15,8 @@ class XivRecipeController {
     @GetMapping("/recipe")
     fun getXivRecipe(
         @RequestParam("itemId", required = true) itemId: Int,
-        @RequestParam("itemName", required = true) itemName: String
+        @RequestParam("recipeId", required = true) recipeId: Int
     ): XivRecipeResponse {
-        return xivRecipeService.getRecipe(itemId, itemName)
+        return xivRecipeService.getRecipe(itemId, recipeId)
     }
 }

@@ -28,12 +28,12 @@ interface XivItemRepository {
             @JvmStatic
             fun getXivItemsByNames(nameList: List<String?>): String {
                 var sql: SQL = SQL()
-                    .SELECT("*")
-                    .FROM("M_XIV_ITEM")
-                    .LEFT_OUTER_JOIN("M_XIV_RECIPE recipe ON item.Name = recipe.Name")
+                    .SELECT("item.*, recipe.ID")
+                    .FROM("M_XIV_ITEM item")
+                    .LEFT_OUTER_JOIN("M_XIV_RECIPE recipe ON item.Name = recipe.ItemResult")
                 val sqlString = StringBuffer()
                 for (index in nameList.indices) {
-                    sqlString.append("Name = #{nameList[$index]} OR ")
+                    sqlString.append("item.Name = #{nameList[$index]} OR ")
                 }
                 sqlString.setLength(sqlString.length - 3)
                 sql = sql.WHERE(sqlString.toString())
@@ -46,13 +46,17 @@ interface XivItemRepository {
             fun getXivItems(xivItemFinder: XivItemFinder): String {
 
                 var sql: SQL =
-                    SQL().SELECT("item.* recipe.ID").FROM("M_XIV_ITEM item")
-                        .LEFT_OUTER_JOIN("M_XIV_RECIPE recipe ON item.Name = recipe.Name")
+                    SQL().SELECT("item.*, recipe.id AS recipeId")
+                        .FROM("M_XIV_ITEM item")
+                        .LEFT_OUTER_JOIN("M_XIV_RECIPE recipe ON item.Name = recipe.ItemResult")
                         .WHERE("Marketable = TRUE")
                         .WHERE("Name LIKE BINARY #{itemName}")
+                        .ORDER_BY("item.ItemLevel DESC")
+                        .ORDER_BY("item.ItemSortCategory")
 
                 sql = whereSql(xivItemFinder, sql)
 
+                println(object{}.javaClass.enclosingMethod.name)
                 println(sql.toString())
                 return sql.toString()
             }
@@ -67,6 +71,7 @@ interface XivItemRepository {
 
                 sql = whereSql(xivItemFinder, sql)
 
+                println(object{}.javaClass.enclosingMethod.name)
                 println(sql.toString())
                 return sql.toString()
             }

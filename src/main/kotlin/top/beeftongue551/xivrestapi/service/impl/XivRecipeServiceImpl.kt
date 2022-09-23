@@ -26,11 +26,11 @@ class XivRecipeServiceImpl : XivRecipeService {
      * レシピ情報を取得する
      *
      * @param itemId アイテムID
-     * @param itemName アイテム名
+     * @param recipeId レシピID
      * @return 返却用のレシピデータ
      */
-    override fun getRecipe(itemId: Int ,itemName: String): XivRecipeResponse {
-        val xivRecipeFinder = XivRecipeFinder(itemName)
+    override fun getRecipe(itemId: Int, recipeId: Int): XivRecipeResponse {
+        val xivRecipeFinder = XivRecipeFinder(recipeId)
         val xivRecipe: XivRecipe = xivRecipeRepository.getXivRecipe(xivRecipeFinder)
         val itemIngredient: List<String?> = makeItemIngredientList(xivRecipe)
         val amountIngredient: List<Int?> = makeAmountIngredient(xivRecipe)

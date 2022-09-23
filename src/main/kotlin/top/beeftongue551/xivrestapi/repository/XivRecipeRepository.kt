@@ -46,7 +46,7 @@ interface XivRecipeRepository {
                     SQL()
                         .SELECT("*")
                         .FROM("M_XIV_RECIPE")
-                        .WHERE("ItemResult = #{itemName}")
+                        .WHERE("ID = #{recipeId}")
 
                 println(sql.toString())
                 return sql.toString()

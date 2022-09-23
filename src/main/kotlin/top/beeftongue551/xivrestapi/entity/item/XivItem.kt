@@ -33,5 +33,5 @@ data class XivItem (
     val equipRestriction: Boolean,
     val classJobCategory: String?,
     val marketable: Boolean,
-    val recipeId: Int?
+    val recipeId: Int? = null
 )

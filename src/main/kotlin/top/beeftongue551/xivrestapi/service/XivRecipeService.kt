@@ -13,8 +13,8 @@ interface XivRecipeService {
      * レシピ情報を取得する
      *
      * @param itemId アイテムID
-     * @param itemName アイテム名
+     * @param recipeId レシピID
      * @return 返却用のレシピデータ
      */
-    fun getRecipe(itemId: Int ,itemName: String): XivRecipeResponse
+    fun getRecipe(itemId: Int ,recipeId: Int): XivRecipeResponse
 }
