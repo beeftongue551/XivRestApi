@@ -19,10 +19,9 @@ package top.beeftongue551.xivrestapi.entity.item
  * @property recipeId レシピID
  * @constructor Create empty XIV item
  */
-data class XivItem (
+data class XivItem(
     val itemId: Int,
     val itemName: String = "",
-    val description: String?,
     val itemIcon: String = "",
     val itemLevel: Int,
     val itemUICategory: String = "",

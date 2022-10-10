@@ -44,7 +44,6 @@ class XivItemServiceImpl : XivItemService {
         val xivItemFinder = XivItemFinder(name, 50, classJob, level, category, page)
         val xivItems: Collection<XivItem> = xivItemRepository.getXivItems(xivItemFinder)
 
-        println(xivItems)
         val resultTotal = xivItemRepository.getXivItemsCount(xivItemFinder)
 
         val pagination = Pagination(page, resultTotal).generate()
